@@ -17,6 +17,7 @@ export class Search extends Component {
   }
 
   render() {
+    const { showClear, clearUsers} = this.props
     return (
       <div>
         <form className="form" onSubmit={this.handleSubmit}>
@@ -27,13 +28,19 @@ export class Search extends Component {
                   onChange={this.inputChange} />
           <input type="submit" value="Search" className="btn btn-dark btn-block" />
         </form>
+        { showClear && (
+          <button className="btn btn-light btn-block"
+          onClick={clearUsers}>Clear</button>
+        )}
       </div>
     )
   }
 }
 
 Search.propTypes = {
-  searchUsers = PropTypes.func.isRequired
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  showClear: PropTypes.bool.isRequired
 }
 
 export default Search
