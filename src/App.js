@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Navbar from './components/layouts/Navbar';
 import UserList from './components/users/UserList';
+import Search from './components/Search';
 
 class App extends Component {
   state = {
@@ -21,8 +22,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
+        
         <div className="container">
-          <UserList loadng={this.state.loading} users={this.state.users}  />
+          <Search />
+          <UserList loading={this.state.loading} users={this.state.users}  />
         </div>
       </div>
     );
