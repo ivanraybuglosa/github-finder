@@ -1,50 +1,45 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'
+import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import GithubContext from '../context/github/githubContext';
 
-export class Search extends Component {
-  state = {
-    text: ''
-  }
+const Search = ({showAlert}) => {
+  const [text, setText] = useState('');
+  const githubContext = useContext(GithubContext);
+
+  const { searchUsers, clearUsers, users } = githubContext;
   
-  inputChange = (e) => {
-    this.setState({text: e.target.value})
+  const inputChange = (e) => {
+    setText(e.target.value);
   }
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(this.state.text === ''){
-      this.props.showAlert('Please enter someting...', 'light');
+    if(text === ''){
+      showAlert('Please enter someting...', 'light');
     } else {
-      this.props.searchUsers(this.state.text);
-      this.setState({text: ''})
+      searchUsers(text);
+      setText('');
     }
   }
-
-  render() {
-    const { showClear, clearUsers} = this.props
     return (
       <div>
-        <form className="form" onSubmit={this.handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <input  type="text" 
                   name="text" 
                   placeholder="Search..." 
-                  value={this.state.value}
-                  onChange={this.inputChange} />
+                  value={text}
+                  onChange={inputChange} />
           <input type="submit" value="Search" className="btn btn-dark btn-block" />
         </form>
-        { showClear && (
+        { users.length > 0 && (
           <button className="btn btn-light btn-block"
           onClick={clearUsers}>Clear</button>
         )}
       </div>
     )
-  }
 }
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
   showAlert: PropTypes.func.isRequired
 }
 
