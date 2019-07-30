@@ -1,5 +1,4 @@
-import { SEARCH_USERS, GET_USERS , GET_USER, GET_REPOS, 
-  SET_ALERT, SET_LOADING, REMOVE_ALERT, CLEAR_USERS} from '../types';
+import { SEARCH_USERS, GET_USERS , GET_USER, GET_REPOS, SET_LOADING, CLEAR_USERS} from '../types';
 
 
 export default (state,action) => {
